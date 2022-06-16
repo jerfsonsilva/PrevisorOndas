@@ -1,9 +1,7 @@
-import supertest from "supertest"
-
 describe('Beach forecast function test', () => {
-	it('should return a forecast with 4 minutes', async ()=> {
-		const { body, status } = await supertest(app).get('/forecast')
+	it('should return a forecast with true', async ()=> {
+		const { body, status } = await global.testRequest.get('/forecast')
 		expect(status).toBe(200)
-		expect(body).toBe({})
+		expect(body).toEqual({result: true})
 	})
 })
