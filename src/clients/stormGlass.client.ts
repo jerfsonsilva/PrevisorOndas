@@ -5,12 +5,15 @@ import {
 } from '@src/interfaces/stormGlass'
 import { InternalError } from '@src/util/errors/internal.error'
 import { AxiosStatic } from 'axios'
+import config, { IConfig } from 'config'
 
-export class ClientRequestError extends InternalError{
-	constructor(message: string){
-		const internalError = `Error when try access stormglass`
-		super(`${internalError}: ${message}`)
-	}
+const stormGlassResourceConfig: IConfig = config.get('App.resources.StormGlass')
+
+export class ClientRequestError extends InternalError {
+  constructor(message: string) {
+    const internalError = `Error when try access stormglass`
+    super(`${internalError}: ${message}`)
+  }
 }
 
 export class StormGlassClient {
@@ -19,20 +22,23 @@ export class StormGlassClient {
   readonly stormGlassAPISource = 'noaa'
   readonly header = {
     headers: {
-      Authorization: `1d57dcaa-eda0-11ec-82d7-0242ac130002-1d57dd22-eda0-11ec-82d7-0242ac130002`,
+      Authorization: `${stormGlassResourceConfig.get('token')}`,
     },
   }
   constructor(protected axios: AxiosStatic) {}
   public async getPoints(lat: number, lng: number): Promise<iForecastPoint[]> {
     try {
       const response = await this.axios.get<iStormGlassForecastResponse>(
-        `https://api.stormglass.io/v2/weather/point?lat=${lat}&lng=${lng}&params=${this.params}&source=${this.stormGlassAPISource}`,
+        `${stormGlassResourceConfig.get(
+          'url'
+        )}/weather/point?lat=${lat}&lng=${lng}&params=${this.params}&source=${
+          this.stormGlassAPISource
+        }`,
         this.header
       )
       if (!response.data) return []
       return this.normalizePoints(response.data)
     } catch (error) {
-		console.log(error)
       const err = error as InternalError
       throw new ClientRequestError(err.message)
     }

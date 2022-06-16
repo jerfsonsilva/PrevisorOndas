@@ -1,0 +1,10 @@
+{
+    "App": {
+        "resources": {
+            "StormGlass": {
+                "url": "https://api.stormglass.io/v2",
+                "token": "1d57dcaa-eda0-11ec-82d7-0242ac130002-1d57dd22-eda0-11ec-82d7-0242ac130002"
+            }
+        }
+    }
+}

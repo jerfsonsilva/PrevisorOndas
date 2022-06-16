@@ -20,3 +20,6 @@ yarn add -D prettier
 yarn add axios
 
 yarn add -D @types/axios
+
+yarn add config
+yarn add -D @types/config
