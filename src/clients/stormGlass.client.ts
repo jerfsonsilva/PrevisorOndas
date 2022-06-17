@@ -2,7 +2,7 @@ import {
   iForecastPoint,
   iStormGlassForecastResponse,
   iStormGlassPoint,
-} from '@src/interfaces/stormGlass'
+} from '@src/entities/stormGlass'
 import { InternalError } from '@src/util/errors/internal.error'
 import config, { IConfig } from 'config'
 import * as HTTPUtil from '@src/util/request'

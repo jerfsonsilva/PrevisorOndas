@@ -1,5 +1,5 @@
 import { StormGlassClient } from '@src/clients/stormGlass.client'
-import { iBeach, iBeachForecast } from '@src/entities/beach'
+import { iBeach, iBeachForecast, iTimeForecast } from '@src/entities/beach'
 import * as HTTPUtil from '@src/util/request'
 
 export class ForecastService {
@@ -9,7 +9,7 @@ export class ForecastService {
 
   public async processForecastForBeaches(
     beaches: iBeach[]
-  ): Promise<iBeachForecast[]> {
+  ): Promise<iTimeForecast[]> {
     const pointsWithCorrectSources: iBeachForecast[] = []
     for (const beach of beaches) {
       const points = await this.stormGlass.getPoints(beach.lat, beach.lng)
@@ -23,6 +23,21 @@ export class ForecastService {
       }))
       pointsWithCorrectSources.push(...beachDataFull)
     }
-    return pointsWithCorrectSources
+    return this.mapForecastByTime(pointsWithCorrectSources)
+  }
+  private mapForecastByTime(forecast: iBeachForecast[]): iTimeForecast[] {
+    const forecastByTime: iTimeForecast[] = [];
+    for (const point of forecast) {
+      const timePoint = forecastByTime.find((f) => f.time === point.time);
+      if (timePoint) {
+        timePoint.forecast.push(point);
+      } else {
+        forecastByTime.push({
+          time: point.time,
+          forecast: [point],
+        });
+      }
+    }
+    return forecastByTime;
   }
 }

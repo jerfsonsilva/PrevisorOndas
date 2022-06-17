@@ -2,9 +2,8 @@ import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface RequestConfig extends AxiosRequestConfig {}
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface Response<T = any> extends AxiosResponse<T> {}
+export interface Response<T = unknown> extends AxiosResponse<T> {}
 
 export class Request {
   constructor(private request = axios) {}
@@ -14,7 +13,7 @@ export class Request {
   }
 
   public static extractErrorData(error: unknown): {
-    data: any
+    data: unknown
     status: number
   } {
     const axiosError = error as AxiosError

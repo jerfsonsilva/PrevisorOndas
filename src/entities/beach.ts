@@ -1,4 +1,4 @@
-import { iForecastPoint } from '@src/interfaces/stormGlass'
+import { iForecastPoint } from '@src/entities/stormGlass'
 
 export enum BeachPosition {
   S = 'S',
@@ -16,3 +16,8 @@ export interface iBeach {
 }
 
 export interface iBeachForecast extends Omit<iBeach, 'user'>, iForecastPoint {}
+
+export interface iTimeForecast {
+  time: string;
+  forecast: iBeachForecast[];
+}
