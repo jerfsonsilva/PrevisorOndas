@@ -1,19 +1,20 @@
 import { StormGlassClient } from '@src/clients/stormGlass.client'
-import axios from 'axios'
 import mockResponseStorm from '@test/mocks/stormGlass_response.mock.json'
 import mockResponseStormNormalize from '@test/mocks/stormGlass_response_normalized.mock.json'
+import * as HTTPUtil from '@src/util/request'
 
-jest.mock('axios')
+jest.mock('@src/util/request')
 
 describe('StormGlass client', () => {
+  const mockedRequest = new HTTPUtil.Request() as jest.Mocked<HTTPUtil.Request>
   it('should return the forecast normalized', async () => {
     const lat = -33.0
     const long = 10.0
+    mockedRequest.get.mockResolvedValue({
+      data: mockResponseStorm,
+    } as HTTPUtil.Response)
 
-    const mockAxios = axios as jest.Mocked<typeof axios>
-    mockAxios.get.mockResolvedValue({ data: mockResponseStorm })
-
-    const stormGlass = new StormGlassClient(mockAxios)
+    const stormGlass = new StormGlassClient(mockedRequest)
     const response = await stormGlass.getPoints(lat, long)
 
     expect(response).toEqual(mockResponseStormNormalize)
@@ -31,10 +32,11 @@ describe('StormGlass client', () => {
         },
       ],
     }
-    const mockAxios = axios as jest.Mocked<typeof axios>
-    mockAxios.get.mockResolvedValue({ data: mockResponseStormInvalid })
+    mockedRequest.get.mockResolvedValue({
+      data: mockResponseStormInvalid,
+    } as HTTPUtil.Response)
 
-    const stormGlass = new StormGlassClient(mockAxios)
+    const stormGlass = new StormGlassClient(mockedRequest)
     const response = await stormGlass.getPoints(lat, long)
 
     expect(response).toEqual([])
@@ -43,11 +45,10 @@ describe('StormGlass client', () => {
     const lat = -331.0
     const long = 102.0
 
-    const mockAxios = axios as jest.Mocked<typeof axios>
     const error = 'Network error'
-    mockAxios.get.mockRejectedValue({ message: error })
+    mockedRequest.get.mockRejectedValue({ message: error })
 
-    const stormGlass = new StormGlassClient(mockAxios)
+    const stormGlass = new StormGlassClient(mockedRequest)
 
     await expect(stormGlass.getPoints(lat, long)).rejects.toThrow(
       `Error when try access stormglass: ${error}`

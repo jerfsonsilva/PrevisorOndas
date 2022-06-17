@@ -4,9 +4,8 @@ import {
   iStormGlassPoint,
 } from '@src/interfaces/stormGlass'
 import { InternalError } from '@src/util/errors/internal.error'
-import { AxiosStatic } from 'axios'
 import config, { IConfig } from 'config'
-
+import * as HTTPUtil from '@src/util/request'
 const stormGlassResourceConfig: IConfig = config.get('App.resources.StormGlass')
 
 export class ClientRequestError extends InternalError {
@@ -25,10 +24,10 @@ export class StormGlassClient {
       Authorization: `${stormGlassResourceConfig.get('token')}`,
     },
   }
-  constructor(protected axios: AxiosStatic) {}
+  constructor(protected request = new HTTPUtil.Request()) {}
   public async getPoints(lat: number, lng: number): Promise<iForecastPoint[]> {
     try {
-      const response = await this.axios.get<iStormGlassForecastResponse>(
+      const response = await this.request.get<iStormGlassForecastResponse>(
         `${stormGlassResourceConfig.get(
           'url'
         )}/weather/point?lat=${lat}&lng=${lng}&params=${this.params}&source=${
