@@ -18,6 +18,6 @@ export interface iBeach {
 export interface iBeachForecast extends Omit<iBeach, 'user'>, iForecastPoint {}
 
 export interface iTimeForecast {
-  time: string;
-  forecast: iBeachForecast[];
+  time: string
+  forecast: iBeachForecast[]
 }

@@ -20,7 +20,7 @@ describe('StormGlass client', () => {
     expect(response).toEqual(mockResponseStormNormalize)
   })
 
-  it('should return Error in invalid forecast', async () => {
+  it('should return empty forecast', async () => {
     const lat = -331.0
     const long = 102.0
     const mockResponseStormInvalid = {
@@ -51,7 +51,7 @@ describe('StormGlass client', () => {
     const stormGlass = new StormGlassClient(mockedRequest)
 
     await expect(stormGlass.getPoints(lat, long)).rejects.toThrow(
-      `Error when try access stormglass: ${error}`
+      error
     )
   })
 })

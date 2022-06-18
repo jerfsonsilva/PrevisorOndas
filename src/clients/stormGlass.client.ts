@@ -8,13 +8,6 @@ import config, { IConfig } from 'config'
 import * as HTTPUtil from '@src/util/request'
 const stormGlassResourceConfig: IConfig = config.get('App.resources.StormGlass')
 
-export class ClientRequestError extends InternalError {
-  constructor(message: string) {
-    const internalError = `Error when try access stormglass`
-    super(`${internalError}: ${message}`)
-  }
-}
-
 export class StormGlassClient {
   readonly params =
     'swellDirection,swellHeight,swellPeriod,waveDirection,waveHeight,windDirection,windSpeed'
@@ -38,8 +31,7 @@ export class StormGlassClient {
       if (!response.data) return []
       return this.normalizePoints(response.data)
     } catch (error) {
-      const err = error as InternalError
-      throw new ClientRequestError(err.message)
+      throw new InternalError((error as Error).message)
     }
   }
   private async normalizePoints(
