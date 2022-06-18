@@ -1,11 +1,11 @@
-import { StormGlassClient } from '@src/clients/stormGlass.client'
+import { StormGlassClient } from '@clients/stormGlass.client'
 import mockResponseStormNormalize from '@test/mocks/stormGlass_reponse_normalized_3.mock.json'
 import mockResponseStormListBeach from '@test/mocks/stormGlass_response_list_beach.json'
-import { ForecastService } from '../forecast.service'
-import { BeachPosition, iBeach } from '@src/entities/beach'
-import { InternalError } from '@src/util/errors/internal.error'
+import { ForecastService } from '@services/forecast.service'
+import { BeachPosition, iBeach } from '@entities/beach'
+import { InternalError } from '@util/errors/internal.error'
 
-jest.mock('@src/clients/stormGlass.client')
+jest.mock('@clients/stormGlass.client')
 
 describe('Forecast service', () => {
   const stormGlassMocked =
@@ -35,6 +35,7 @@ describe('Forecast service', () => {
   it('should return internal error', async () => {
     const errorMessage = 'Message geting data'
     stormGlassMocked.getPoints.mockRejectedValue({message: errorMessage})
+    
     const forecast = new ForecastService(stormGlassMocked)
     await expect(
       forecast.processForecastForBeaches(beachesMock)

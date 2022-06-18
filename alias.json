@@ -1,0 +1,9 @@
+{
+    "src": "src",
+    "test": "test",
+    "entities": "src/entities",
+    "database": "src/database",
+    "clients": "src/clients",
+    "services": "src/services",
+    "util": "src/util"
+}

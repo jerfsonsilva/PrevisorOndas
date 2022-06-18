@@ -20,6 +20,11 @@
     "baseUrl": ".",
     "paths": {
       "@src/*": ["./src/*"],
+      "@entities/*": ["./src/entities/*"],
+      "@database/*": ["./src/entities/*"],
+      "@clients/*": ["./src/clients/*"],
+      "@services/*": ["./src/services/*"],
+      "@util/*": ["./src/util/*"],
       "@test/*": ["./test/*"]
     },
     "rootDirs": ["./src", "./test"],

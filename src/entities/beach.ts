@@ -1,4 +1,4 @@
-import { iForecastPoint } from '@src/entities/stormGlass'
+import { iForecastPoint } from '@entities/stormGlass'
 
 export enum BeachPosition {
   S = 'S',

@@ -1,6 +1,6 @@
-import { StormGlassClient } from '@src/clients/stormGlass.client'
-import { iBeach, iBeachForecast, iTimeForecast } from '@src/entities/beach'
-import { InternalError } from '@src/util/errors/internal.error'
+import { StormGlassClient } from '@clients/stormGlass.client'
+import { iBeach, iBeachForecast, iTimeForecast } from '@entities/beach'
+import { InternalError } from '@util/errors/internal.error'
 
 export class ForecastService {
   constructor(protected stormGlass = new StormGlassClient()) {}

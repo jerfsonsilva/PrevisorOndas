@@ -2,10 +2,10 @@ import {
   iForecastPoint,
   iStormGlassForecastResponse,
   iStormGlassPoint,
-} from '@src/entities/stormGlass'
-import { InternalError } from '@src/util/errors/internal.error'
+} from '@entities/stormGlass'
+import { InternalError } from '@util/errors/internal.error'
 import config, { IConfig } from 'config'
-import * as HTTPUtil from '@src/util/request'
+import * as HTTPUtil from '@util/request'
 const stormGlassResourceConfig: IConfig = config.get('App.resources.StormGlass')
 
 export class StormGlassClient {
@@ -18,6 +18,7 @@ export class StormGlassClient {
     },
   }
   constructor(protected request = new HTTPUtil.Request()) {}
+
   public async getPoints(lat: number, lng: number): Promise<iForecastPoint[]> {
     try {
       const response = await this.request.get<iStormGlassForecastResponse>(
@@ -34,6 +35,7 @@ export class StormGlassClient {
       throw new InternalError((error as Error).message)
     }
   }
+
   private async normalizePoints(
     points: iStormGlassForecastResponse
   ): Promise<iForecastPoint[]> {
@@ -48,6 +50,7 @@ export class StormGlassClient {
       swellPeriod: point.swellPeriod[this.stormGlassAPISource],
     }))
   }
+  
   private isValidPoint(point: Partial<iStormGlassPoint>): boolean {
     return !!(
       point.time &&

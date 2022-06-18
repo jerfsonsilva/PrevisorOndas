@@ -23,3 +23,6 @@ yarn add -D @types/axios
 
 yarn add config
 yarn add -D @types/config
+
+yarn add moongose
+yarn add -D @types/mongoose
