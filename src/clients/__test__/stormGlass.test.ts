@@ -45,9 +45,6 @@ describe('StormGlass client', () => {
     const error = 'Network error'
     mockedRequest.get.mockRejectedValue({ message: error })
     const stormGlass = new StormGlassClient(mockedRequest)
-    await expect(stormGlass.getPoints(latMock, lngMock)).rejects.toThrow(
-      error
-    )
+    await expect(stormGlass.getPoints(latMock, lngMock)).rejects.toThrow(error)
   })
-
 })

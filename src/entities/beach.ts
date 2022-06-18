@@ -12,7 +12,7 @@ export interface iBeach {
   position: BeachPosition
   lat: number
   lng: number
-  user: string
+  user?: string
 }
 
 export interface iBeachForecast extends Omit<iBeach, 'user'>, iForecastPoint {}

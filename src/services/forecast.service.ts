@@ -17,7 +17,7 @@ export class ForecastService {
           lng: beach.lng,
           name: beach.name,
           position: beach.position,
-          rating: 1,// TODO implements function to calc the rating
+          rating: 1, // TODO implements function to calc the rating
           ...item,
         }))
         pointsWithCorrectSources.push(...beachDataFull)

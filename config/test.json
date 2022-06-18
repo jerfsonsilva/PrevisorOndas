@@ -2,7 +2,7 @@
     "App": {
         "databases": {
             "mongo": {
-                "url": "teste"
+                "url": "mongodb://localhost:27017/surf-forecast"
             }
         },
         "resources": {

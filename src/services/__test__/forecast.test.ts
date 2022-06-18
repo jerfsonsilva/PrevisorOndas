@@ -10,16 +10,16 @@ jest.mock('@clients/stormGlass.client')
 describe('Forecast service', () => {
   const stormGlassMocked =
     new StormGlassClient() as jest.Mocked<StormGlassClient>
-    const { lat, lng, name } = mockResponseStormListBeach[0].forecast[0]
-    const beachesMock = [
-      {
-        lat,
-        lng,
-        name,
-        position: BeachPosition.E,
-        user: 'some'
-      },
-    ] as iBeach[]
+  const { lat, lng, name } = mockResponseStormListBeach[0].forecast[0]
+  const beachesMock = [
+    {
+      lat,
+      lng,
+      name,
+      position: BeachPosition.E,
+      user: 'some',
+    },
+  ] as iBeach[]
   it('should return the list of beaches', async () => {
     stormGlassMocked.getPoints.mockResolvedValue(mockResponseStormNormalize)
 
@@ -34,8 +34,8 @@ describe('Forecast service', () => {
   })
   it('should return internal error', async () => {
     const errorMessage = 'Message geting data'
-    stormGlassMocked.getPoints.mockRejectedValue({message: errorMessage})
-    
+    stormGlassMocked.getPoints.mockRejectedValue({ message: errorMessage })
+
     const forecast = new ForecastService(stormGlassMocked)
     await expect(
       forecast.processForecastForBeaches(beachesMock)

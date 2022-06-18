@@ -6,6 +6,7 @@
     "scripts": {
         "fix": "yarn lint:fix && yarn style:fix",
         "build": "tsc",
+        "typecheck": "tsc --noEmit",
         "start": "yarn build && node dist/src/index.js",
         "start:dev": "ts-node-dev src/index.ts",
         "test:func": "jest --projects ./test --runInBand",

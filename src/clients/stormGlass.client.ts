@@ -50,7 +50,7 @@ export class StormGlassClient {
       swellPeriod: point.swellPeriod[this.stormGlassAPISource],
     }))
   }
-  
+
   private isValidPoint(point: Partial<iStormGlassPoint>): boolean {
     return !!(
       point.time &&
