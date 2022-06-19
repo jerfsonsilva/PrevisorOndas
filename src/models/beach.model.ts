@@ -1,4 +1,4 @@
-import mongoose, { Document } from 'mongoose';
+import mongoose, { Document } from 'mongoose'
 import { BeachPosition } from '@entities/beach'
 
 export interface iBeach {
@@ -21,9 +21,9 @@ const schema = new mongoose.Schema<iBeachModel>(
   {
     toJSON: {
       transform: (_, ret): void => {
-        ret.id = ret._id;
-        delete ret._id;
-        delete ret.__v;
+        ret.id = ret._id
+        delete ret._id
+        delete ret.__v
       },
     },
   }

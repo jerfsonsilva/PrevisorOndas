@@ -23,7 +23,9 @@ describe('Beach functional test', () => {
       }
       const response = await global.testRequest.post('/beach').send(newBeach)
       expect(response.status).toBe(422)
-      expect(response.body).toEqual({error: expect.stringContaining('Beach validation failed: lat')})
+      expect(response.body).toEqual({
+        error: expect.stringContaining('Beach validation failed: lat'),
+      })
     })
     it('should return 500', async () => {
       await global.server.close()
@@ -35,9 +37,7 @@ describe('Beach functional test', () => {
       }
       const response = await global.testRequest.post('/beach').send(newBeach)
       expect(response.status).toBe(500)
-      expect(response.body).toEqual({error: 'Internal server error'})
-    });
-
+      expect(response.body).toEqual({ error: 'Internal server error' })
+    })
   })
-
 })

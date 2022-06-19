@@ -26,3 +26,6 @@ yarn add -D @types/config
 
 yarn add moongose
 yarn add -D @types/mongoose
+
+yarn add nock
+yarn add -D @types/nock
