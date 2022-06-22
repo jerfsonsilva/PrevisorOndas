@@ -21,9 +21,11 @@
     "paths": {
       "@src/*": ["./src/*"],
       "@entities/*": ["./src/entities/*"],
-      "@database/*": ["./src/entities/*"],
+      "@controllers/*": ["./src/controllers/*"],
+      "@database/*": ["./src/database/*"],
       "@clients/*": ["./src/clients/*"],
       "@services/*": ["./src/services/*"],
+      "@models/*": ["./src/models/*"],
       "@util/*": ["./src/util/*"],
       "@test/*": ["./test/*"]
     },

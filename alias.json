@@ -3,7 +3,9 @@
     "test": "test",
     "entities": "src/entities",
     "database": "src/database",
+    "controllers": "src/controllers",
     "clients": "src/clients",
     "services": "src/services",
+    "models": "src/models",
     "util": "src/util"
 }

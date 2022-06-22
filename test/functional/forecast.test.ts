@@ -12,7 +12,7 @@ describe('Beach forecast functional test', () => {
       lat: 10,
       lng: 12,
       name: 'Manly',
-      position: BeachPosition.E
+      position: BeachPosition.E,
     }
     const beach = new BeachModel(defaultBeach)
     await beach.save()
@@ -49,7 +49,7 @@ describe('Beach forecast functional test', () => {
       .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
       .get('/v1/weather/point')
       .query({ lat: '-33.792726', lng: '151.289824' })
-      .replyWithError('Something went wrong');
+      .replyWithError('Something went wrong')
 
     const { body, status } = await global.testRequest.get('/forecast')
     expect(status).toBe(errorListCode.internalError.erroCode)

@@ -1,22 +1,21 @@
 import { Controller, Post } from '@overnightjs/core'
-import { BeachModel } from '@src/models/beach.model'
-import { Request, Response } from 'express'
+import { UserModel } from '@models/user.model'
+import { Response, Request } from 'express'
 import mongoose from 'mongoose'
 
-@Controller('beach')
-export class BeachController {
+@Controller('user')
+export class UsersController {
   @Post('')
   public async create(req: Request, res: Response): Promise<void> {
     try {
-      const { lat, lng, name, position } = req.body
-      const beach = new BeachModel({
-        lat,
-        lng,
+      const { name, email, password } = req.body
+      const user = new UserModel({
         name,
-        position,
+        email,
+        password,
       })
-      const result = await beach.save()
-      res.status(201).send(result)
+      const newUser = await user.save()
+      res.status(201).send(newUser)
     } catch (error) {
       if (error instanceof mongoose.Error.ValidationError) {
         res.status(422).send({ error: (error as Error).message })

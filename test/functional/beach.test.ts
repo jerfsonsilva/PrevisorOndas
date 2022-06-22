@@ -1,4 +1,4 @@
-import { BeachPosition, iBeach } from '@src/entities/beach'
+import { BeachPosition, iBeach } from '@entities/beach'
 
 describe('Beach functional test', () => {
   describe('When creating a beach', () => {
